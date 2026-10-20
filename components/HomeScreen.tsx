@@ -14,7 +14,6 @@ import {
 import DrawerMenu from './DrawerMenu';
 import { Activity, DrawerSection } from '../types';
 
-// ─── Données statiques ───────────────────────────────────────────────────────
 
 const ACTIVITIES: Activity[] = [
   { id: 1, titre: 'Dessin et coloriage', description: 'Développement de la créativité', icone: '🎨' },
@@ -24,7 +23,6 @@ const ACTIVITIES: Activity[] = [
   { id: 5, titre: 'Activités sportives', description: 'Développement de la motricité', icone: '⚽' },
 ];
 
-// ─── Carte d'activité avec animation ────────────────────────────────────────
 
 interface ActivityCardProps {
   item: Activity;
@@ -70,7 +68,7 @@ function ActivityCard({ item, onPress }: ActivityCardProps) {
   );
 }
 
-// ─── Section À propos ────────────────────────────────────────────────────────
+
 
 function AboutSection() {
   return (
@@ -94,9 +92,6 @@ function AboutSection() {
     </View>
   );
 }
-
-// ─── Composant principal ─────────────────────────────────────────────────────
-
 export default function HomeScreen() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<DrawerSection>('accueil');
@@ -204,7 +199,7 @@ export default function HomeScreen() {
   );
 }
 
-// ─── Styles ──────────────────────────────────────────────────────────────────
+// ─── Styles 
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: '#F6F5FB' },

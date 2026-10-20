@@ -2,10 +2,6 @@ Ma Garderie
 
 Application mobile **React Native / Expo / TypeScript** pour la gestion des activités d'une garderie d'enfants.
 
----
-
- 
----
 
  Fonctionnalités
 
@@ -107,7 +103,4 @@ Chaque branche a été mergée dans `main` avec `--no-ff` pour conserver l'histo
 | Expo | ~58.0.16 |
 | TypeScript | ~6.0 |
 | Node.js | v22.19.0 |
-
----
-
 
