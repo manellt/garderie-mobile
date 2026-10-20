@@ -4,12 +4,7 @@ Application mobile **React Native / Expo / TypeScript** pour la gestion des acti
 
 ---
 
- Aperçu
-
-| Splash Screen | Accueil | Activités | À propos |
-|:---:|:---:|:---:|:---:|
-| ![Splash](screenshots/splash.png) | ![Accueil](screenshots/home.png) | ![Activités](screenshots/activities.png) | ![À propos](screenshots/about.png) |
-
+ 
 ---
 
  Fonctionnalités
