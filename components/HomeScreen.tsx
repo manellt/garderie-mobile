@@ -9,16 +9,8 @@ import {
   StatusBar as RNStatusBar,
   FlatList,
 } from 'react-native';
-import DrawerMenu, { DrawerSection } from './DrawerMenu';
-
-// ─── Types ──────────────────────────────────────────────────────────────────
-
-interface Activity {
-  id: number;
-  titre: string;
-  description: string;
-  icone: string;
-}
+import DrawerMenu from './DrawerMenu';
+import { Activity, DrawerSection } from '../types';
 
 // ─── Données statiques ───────────────────────────────────────────────────────
 
@@ -215,7 +207,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingBottom: 80, // espace pour le FAB
+    paddingBottom: 80,
   },
   listContent: {
     padding: 16,
