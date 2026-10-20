@@ -4,7 +4,7 @@ Application mobile **React Native / Expo / TypeScript** pour la gestion des acti
 
 ---
 
-## 📱 Aperçu
+ Aperçu
 
 | Splash Screen | Accueil | Activités | À propos |
 |:---:|:---:|:---:|:---:|
@@ -115,12 +115,4 @@ Chaque branche a été mergée dans `main` avec `--no-ff` pour conserver l'histo
 
 ---
 
-##  Auteur
 
-Développé par **manel* ([manellt](https://github.com/manellt)) dans le cadre d'un projet pédagogique.
-
----
-
-## 📄 Licence
-
-MIT — voir le fichier [LICENSE](LICENSE).
