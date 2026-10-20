@@ -8,7 +8,9 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-export type DrawerSection = 'accueil' | 'activites' | 'apropos';
+import { DrawerSection } from '../types';
+
+export type { DrawerSection };
 
 interface Props {
   visible: boolean;
