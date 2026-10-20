@@ -8,6 +8,8 @@ import {
   Platform,
   StatusBar as RNStatusBar,
   FlatList,
+  Animated,
+  Pressable,
 } from 'react-native';
 import DrawerMenu from './DrawerMenu';
 import { Activity, DrawerSection } from '../types';
@@ -22,7 +24,7 @@ const ACTIVITIES: Activity[] = [
   { id: 5, titre: 'Activités sportives', description: 'Développement de la motricité', icone: '⚽' },
 ];
 
-// ─── Carte d'activité ────────────────────────────────────────────────────────
+// ─── Carte d'activité avec animation ────────────────────────────────────────
 
 interface ActivityCardProps {
   item: Activity;
@@ -30,18 +32,41 @@ interface ActivityCardProps {
 }
 
 function ActivityCard({ item, onPress }: ActivityCardProps) {
+  const scale = React.useRef(new Animated.Value(1)).current;
+
+  const handlePressIn = () => {
+    Animated.spring(scale, {
+      toValue: 0.96,
+      useNativeDriver: true,
+      speed: 30,
+      bounciness: 4,
+    }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.spring(scale, {
+      toValue: 1,
+      useNativeDriver: true,
+      speed: 20,
+      bounciness: 6,
+    }).start();
+  };
+
   return (
-    <TouchableOpacity
-      style={styles.card}
+    <Pressable
       onPress={() => onPress(item.titre)}
-      activeOpacity={0.75}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
     >
-      <Text style={styles.cardIcon}>{item.icone}</Text>
-      <View style={styles.cardText}>
-        <Text style={styles.cardTitle}>{item.titre}</Text>
-        <Text style={styles.cardDesc}>{item.description}</Text>
-      </View>
-    </TouchableOpacity>
+      <Animated.View style={[styles.card, { transform: [{ scale }] }]}>
+        <Text style={styles.cardIcon}>{item.icone}</Text>
+        <View style={styles.cardText}>
+          <Text style={styles.cardTitle}>{item.titre}</Text>
+          <Text style={styles.cardDesc}>{item.description}</Text>
+        </View>
+        <Text style={styles.cardChevron}>›</Text>
+      </Animated.View>
+    </Pressable>
   );
 }
 
@@ -84,11 +109,19 @@ export default function HomeScreen() {
   }, []);
 
   const handleActivityPress = useCallback((titre: string) => {
-    Alert.alert('Activité sélectionnée', titre);
+    Alert.alert(
+      '🎯 Activité sélectionnée',
+      titre,
+      [{ text: 'Super !', style: 'default' }]
+    );
   }, []);
 
   const handleFABPress = useCallback(() => {
-    Alert.alert('Nouvelle activité', 'Nouvelle activité');
+    Alert.alert(
+      '➕ Nouvelle activité',
+      'Cette fonctionnalité sera disponible prochainement.',
+      [{ text: 'OK', style: 'cancel' }]
+    );
   }, []);
 
   const renderActivity = useCallback(
@@ -100,13 +133,12 @@ export default function HomeScreen() {
 
   const keyExtractor = useCallback((item: Activity) => String(item.id), []);
 
-  // ── Contenu de la zone principale selon la section active ──
+  // ── Contenu selon la section active ──
   const renderMainContent = () => {
     if (activeSection === 'apropos') {
       return <AboutSection />;
     }
 
-    // accueil et activites affichent la FlatList
     return (
       <FlatList
         data={ACTIVITIES}
@@ -138,7 +170,11 @@ export default function HomeScreen() {
     <View style={styles.root}>
       {/* AppBar */}
       <View style={[styles.appBar, { paddingTop: STATUS_BAR_HEIGHT + 12 }]}>
-        <TouchableOpacity onPress={openDrawer} style={styles.menuBtn} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
+        <TouchableOpacity
+          onPress={openDrawer}
+          style={styles.menuBtn}
+          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+        >
           <Text style={styles.menuIcon}>☰</Text>
         </TouchableOpacity>
         <Text style={styles.appBarTitle}>Ma Garderie</Text>
@@ -146,9 +182,7 @@ export default function HomeScreen() {
       </View>
 
       {/* Contenu */}
-      <View style={styles.content}>
-        {renderMainContent()}
-      </View>
+      <View style={styles.content}>{renderMainContent()}</View>
 
       {/* FAB */}
       <TouchableOpacity
@@ -173,10 +207,7 @@ export default function HomeScreen() {
 // ─── Styles ──────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    backgroundColor: '#F6F5FB',
-  },
+  root: { flex: 1, backgroundColor: '#F6F5FB' },
   appBar: {
     backgroundColor: '#066E52',
     flexDirection: 'row',
@@ -190,29 +221,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 4,
   },
-  menuBtn: {
-    width: 40,
-    alignItems: 'center',
-  },
-  menuIcon: {
-    fontSize: 24,
-    color: '#fff',
-    lineHeight: 28,
-  },
+  menuBtn: { width: 40, alignItems: 'center' },
+  menuIcon: { fontSize: 24, color: '#fff', lineHeight: 28 },
   appBarTitle: {
     color: '#fff',
     fontSize: 20,
     fontWeight: 'bold',
     letterSpacing: 0.5,
   },
-  content: {
-    flex: 1,
-    paddingBottom: 80,
-  },
-  listContent: {
-    padding: 16,
-    paddingBottom: 24,
-  },
+  content: { flex: 1, paddingBottom: 80 },
+  listContent: { padding: 16, paddingBottom: 24 },
   welcomeBanner: {
     backgroundColor: '#DDF3EA',
     borderRadius: 16,
@@ -220,15 +238,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
   },
-  welcomeEmoji: {
-    fontSize: 48,
-    marginBottom: 8,
-  },
-  welcomeTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#066E52',
-  },
+  welcomeEmoji: { fontSize: 48, marginBottom: 8 },
+  welcomeTitle: { fontSize: 22, fontWeight: 'bold', color: '#066E52' },
   welcomeSubtitle: {
     fontSize: 14,
     color: '#066E52',
@@ -255,22 +266,20 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 4,
   },
-  cardIcon: {
-    fontSize: 36,
-    marginRight: 16,
-  },
-  cardText: {
-    flex: 1,
-  },
+  cardIcon: { fontSize: 36, marginRight: 16 },
+  cardText: { flex: 1 },
   cardTitle: {
     fontSize: 16,
     fontWeight: '700',
     color: '#1a1a1a',
     marginBottom: 4,
   },
-  cardDesc: {
-    fontSize: 13,
-    color: '#666',
+  cardDesc: { fontSize: 13, color: '#666' },
+  cardChevron: {
+    fontSize: 22,
+    color: '#066E52',
+    fontWeight: 'bold',
+    opacity: 0.6,
   },
   fab: {
     position: 'absolute',
@@ -288,20 +297,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 6,
   },
-  fabIcon: {
-    color: '#fff',
-    fontSize: 30,
-    lineHeight: 34,
-    fontWeight: '300',
-  },
-  sectionContent: {
-    padding: 24,
-    alignItems: 'center',
-  },
-  sectionIcon: {
-    fontSize: 64,
-    marginBottom: 16,
-  },
+  fabIcon: { color: '#fff', fontSize: 30, lineHeight: 34, fontWeight: '300' },
+  sectionContent: { padding: 24, alignItems: 'center' },
+  sectionIcon: { fontSize: 64, marginBottom: 16 },
   sectionTitle: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -330,9 +328,5 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     marginTop: 8,
   },
-  infoValue: {
-    fontSize: 15,
-    color: '#333',
-    marginTop: 2,
-  },
+  infoValue: { fontSize: 15, color: '#333', marginTop: 2 },
 });
