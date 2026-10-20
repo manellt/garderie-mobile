@@ -32,7 +32,7 @@ export default function DrawerMenu({ visible, activeSection, onSelect, onClose }
   if (!visible) return null;
 
   return (
-    <View style={StyleSheet.absoluteFillObject}>
+    <View style={StyleSheet.absoluteFill}>
       <TouchableWithoutFeedback onPress={onClose}>
         <View style={styles.overlay} />
       </TouchableWithoutFeedback>
@@ -72,7 +72,7 @@ export default function DrawerMenu({ visible, activeSection, onSelect, onClose }
 
 const styles = StyleSheet.create({
   overlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     backgroundColor: 'rgba(0,0,0,0.4)',
   },
   drawer: {
