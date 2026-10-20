@@ -1,4 +1,4 @@
-# 🌿 Ma Garderie
+Ma Garderie
 
 Application mobile **React Native / Expo / TypeScript** pour la gestion des activités d'une garderie d'enfants.
 
@@ -12,7 +12,7 @@ Application mobile **React Native / Expo / TypeScript** pour la gestion des acti
 
 ---
 
-## ✨ Fonctionnalités
+ Fonctionnalités
 
 - **Splash screen animé** — logo + titre affiché 3 secondes au démarrage
 - **AppBar verte** — avec bouton hamburger pour ouvrir le drawer
@@ -24,7 +24,7 @@ Application mobile **React Native / Expo / TypeScript** pour la gestion des acti
 
 ---
 
-## 🏗️ Architecture
+ Architecture
 
 ```
 garderie-mobile/
@@ -51,8 +51,7 @@ garderie-mobile/
 ```
 
 ---
-
-## 🎨 Charte graphique
+ Charte graphique
 
 | Élément | Couleur |
 |---|---|
@@ -64,7 +63,7 @@ garderie-mobile/
 
 ---
 
-## 🚀 Installation et démarrage
+ Installation et démarrage
 
 ### Prérequis
 
@@ -90,7 +89,7 @@ Scannez ensuite le QR code avec **Expo Go** (Android) ou l'appareil photo (iOS).
 
 ---
 
-## 🌿 Branches Git
+##  Branches Git
 
 | Branche | Objectif |
 |---|---|
@@ -105,7 +104,7 @@ Chaque branche a été mergée dans `main` avec `--no-ff` pour conserver l'histo
 
 ---
 
-## 🛠️ Stack technique
+## Stack technique
 
 | Technologie | Version |
 |---|---|
@@ -116,9 +115,9 @@ Chaque branche a été mergée dans `main` avec `--no-ff` pour conserver l'histo
 
 ---
 
-## 👶 Auteur
+##  Auteur
 
-Développé par **Oswa-hub** ([manellt](https://github.com/manellt)) dans le cadre d'un projet pédagogique.
+Développé par **manel* ([manellt](https://github.com/manellt)) dans le cadre d'un projet pédagogique.
 
 ---
 
